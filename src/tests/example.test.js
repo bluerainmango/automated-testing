@@ -1,35 +1,33 @@
-import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer";
 import { step } from "mocha-steps";
-// import { step } from "mocha-steps";
+
+import Page from "../builder";
 
 describe("Mocha steps demo", () => {
-  let browser;
+  //   let browser;
   let page;
+  let mobile;
 
   before(async () => {
-    browser = await puppeteer.launch({ headless: true });
-    page = await browser.newPage();
-    await page.setDefaultTimeout(7000);
+    //! code before using builder
+    // browser = await puppeteer.launch({ headless: true });
+    // page = await browser.newPage();
+    // await page.setDefaultTimeout(7000);
+
+    //! instances using builder
+    page = await Page.build("Desktop");
+    mobile = await Page.build("Mobile");
   });
 
   after(async () => {
-    await browser.close();
+    // await browser.close();
+    await page.close();
+    await mobile.close();
   });
 
   step("should load google homepage", async () => {
-    await page.goto("https://google.com");
-  });
-
-  step("step 2", async () => {
-    console.log("From step 2");
-  });
-  step("step 3", async () => {
-    await page.waitForSelector("#fail");
-  });
-  istept("step 4", async () => {
-    console.log("From step 2");
-  });
-  step("step 5", async () => {
-    console.log("From step 2");
+    await page.goto("http://zero.webappsecurity.com/index.html");
+    await page.waitAndClick("#onlineBankingMenu");
+    await page.waitFor(5000);
   });
 });
