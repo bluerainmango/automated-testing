@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 
+//! Smoke test: checking the page is loaded
 describe('Smoke Test', () => {
 	it('should load website', async function () {
 		let browser = await puppeteer.launch({ headless: true })
