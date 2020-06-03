@@ -4,7 +4,8 @@
   "description": "CI /CD with Puppeteer and Jenkins",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "e2e-test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/e2e.test.js",
+    "smoke-test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/smoke.test.js"
   },
   "keywords": [
     "Puppeteer",
