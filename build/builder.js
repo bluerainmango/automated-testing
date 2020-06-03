@@ -14,22 +14,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//! Builder Pattern
-// 보통은 따로 page build 생성자(original 생성자)를 만들어서 아래 Builder 생성자안에서 new original()로 instance를 만들어 준 뒤 활용하는데, 여기서는 static 함수로 만들어서 활용함. 보통의 패턴은 내 노트 확인할 것(Mocha + puppeteer).
+//! Builder Pattern using static func
+// 보통은 따로 page build 생성자(original 생성자)를 만들어서 아래 Builder 생성자안에서 new original()로 instance를 만들어 준 뒤 활용하는데, 여기서는 별도의 생성자 대신 static 함수로 만들어서 활용함. 보통의 패턴은 내 노트 확인할 것(Mocha + puppeteer).
 var Builder = function () {
   _createClass(Builder, null, [{
     key: "build",
+
+    //* 1. Static func
     value: async function build(viewport) {
       var launchOptions = {
-        headless: true,
-        slowMo: 0,
+        headless: false,
+        slowMo: 10,
         args: ["--no-sandbox", "--disable-setui-sandbox", "--disable-web-security"]
       };
 
       var browser = await _puppeteer2.default.launch(launchOptions);
       var page = await browser.newPage();
 
-      //! extend page by creating Builder's instance
+      //! Extend page by creating Builder's instance
       // 단순히 page 객체였던 것을 아래 waitAndClick 등의 custom 메소드를 가진 page 객체로 extend
       var extendedPage = new Builder(page);
       page.setDefaultTimeout(10000);
@@ -50,12 +52,12 @@ var Builder = function () {
           throw new Error("supported devices are only Mobile | Tablet | Desktop");
       }
 
-      //! new Proxy(target, handler)
+      //! New Proxy(target, handler)
+      //* Return page,extentedPage,browser's property(method) whenever it's called.
       // 프록시란 실제 객체를 대신하는 객체.
       // 인자로 target: hidden original obj, handler: new behavior를 추가.
       // 해당 프록시 객체 역할: instance.property 형식으로 부르면, extendedPage, browswer, page에서 해당 property를 찾아 return 해라.
       // 즉, Builder.build().waitAndClick 하면 아래 메소드가 출력되는 것.
-      //: just return target's property(method)
       return new Proxy(extendedPage, {
         get: function get(_target, property) {
           return extendedPage[property] || browser[property] || page[property];

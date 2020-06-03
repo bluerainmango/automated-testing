@@ -3,11 +3,13 @@ import { step } from "mocha-steps";
 import { expect } from "chai";
 
 import Page from "../builder";
+import LoginPage from "../pages/LoginPage";
 
 describe("Mocha steps demo", () => {
   //   let browser;
   let page;
-  let mobile;
+  let loginPage;
+  // let mobile;
 
   before(async () => {
     //! code before using builder
@@ -17,13 +19,14 @@ describe("Mocha steps demo", () => {
 
     //! instances using builder
     page = await Page.build("Desktop");
-    mobile = await Page.build("Mobile");
+    loginPage = new LoginPage(page);
+    // mobile = await Page.build("Mobile");
   });
 
   after(async () => {
     // await browser.close();
     await page.close();
-    await mobile.close();
+    // await mobile.close();
   });
 
   step("should signin button is visible", async () => {
@@ -38,9 +41,18 @@ describe("Mocha steps demo", () => {
   });
 
   step("should login to app", async () => {
-    await page.waitAndType("#user_login", "username");
-    await page.waitAndType("#user_password", "password");
-    await page.waitAndClick(".btn-primary");
+    //! Before using LoginPage class
+    // await page.waitAndType("#user_login", "username");
+    // await page.waitAndType("#user_password", "password");
+    // await page.waitAndClick(".btn-primary");
+
+    //* After using LoginPage class
+    await loginPage.login("username", "password");
+
     expect(await page.isElementVisible(".nav-tabs")).to.be.true;
+  });
+
+  step("should have 6 navbar links", async () => {
+    expect(await page.getCount(".nav-tabs li")).to.equal(6);
   });
 });
