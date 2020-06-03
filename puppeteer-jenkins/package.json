@@ -1,0 +1,22 @@
+{
+  "name": "puppeteer-jenkins",
+  "version": "1.0.0",
+  "description": "CI /CD with Puppeteer and Jenkins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Puppeteer",
+    "Jenkins",
+    "Automation",
+    "Builds"
+  ],
+  "author": "Emily Yu",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0",
+    "puppeteer": "^3.3.0"
+  }
+}
