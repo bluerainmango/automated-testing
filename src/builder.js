@@ -85,7 +85,7 @@ export default class Builder {
   async isElementVisible(selector) {
     let visible = true;
     await this.page
-      .waitForSelector(selelctor, { visible: true, timeout: 3000 })
+      .waitForSelector(selector, { visible: true, timeout: 3000 })
       .catch(() => (visible = false));
 
     return visible;
@@ -93,7 +93,7 @@ export default class Builder {
   async isXPathVisible(selector) {
     let visible = true;
     await this.page
-      .waitForXPath(selelctor, { visible: true, timeout: 3000 })
+      .waitForXPath(selector, { visible: true, timeout: 3000 })
       .catch(() => (visible = false));
 
     return visible;

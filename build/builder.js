@@ -110,6 +110,26 @@ var Builder = function () {
       }
       await elements[0].click();
     }
+  }, {
+    key: "isElementVisible",
+    value: async function isElementVisible(selector) {
+      var visible = true;
+      await this.page.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(function () {
+        return visible = false;
+      });
+
+      return visible;
+    }
+  }, {
+    key: "isXPathVisible",
+    value: async function isXPathVisible(selector) {
+      var visible = true;
+      await this.page.waitForXPath(selector, { visible: true, timeout: 3000 }).catch(function () {
+        return visible = false;
+      });
+
+      return visible;
+    }
   }]);
 
   return Builder;
