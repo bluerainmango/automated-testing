@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "e2e-test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/e2e.test.js",
-    "smoke-test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/smoke.test.js"
+    "smoke-test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/smoke.test.js",
+    "start-jenkins-server": "java -jar jenkins.war -httpPort=8080 --enable-future-java"
   },
   "keywords": [
     "Puppeteer",
