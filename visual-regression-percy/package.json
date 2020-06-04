@@ -1,0 +1,36 @@
+{
+  "name": "puppeteer-project",
+  "version": "1.0.0",
+  "description": "Automated software testing with Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test:example": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/example.test.js",
+    "test:device": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/device.test.js",
+    "test:e2e": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests/e2e/*.test.js",
+    "test-snapshots": "jest --config=jest.config.js --detectOpenHandles --forceExit",
+    "test-snapshots-update": "jest --config=jest.config.js --updateSnapshot --detectOpenHandles --forceExit",
+    "test:percy": "percy exec -- jest -i './tests-snapshots/__tests__/percy.test.js'"
+  },
+  "keywords": [
+    "puppetter",
+    "mocha",
+    "chai",
+    "automation"
+  ],
+  "author": "Emily Yu",
+  "license": "ISC",
+  "dependencies": {
+    "@percy/puppeteer": "^1.1.0",
+    "chai": "^4.2.0",
+    "jest": "^26.0.1",
+    "jest-image-snapshot": "^4.0.2",
+    "jest-puppeteer": "^4.4.0",
+    "mocha": "^7.2.0",
+    "puppeteer": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-jest": "^26.0.1"
+  }
+}
