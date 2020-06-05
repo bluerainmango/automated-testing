@@ -1,0 +1,18 @@
+{
+  "name": "puppeteer-scraper",
+  "version": "1.0.0",
+  "description": "web scraping with puppeteer: data mining",
+  "main": "index.js",
+  "scripts": {
+    "scraper": "node scraper.js",
+    "scraper:3": "for run in {1..3}; do node scraper.js; done"
+  },
+  "author": "Emily Yu",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^3.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}
