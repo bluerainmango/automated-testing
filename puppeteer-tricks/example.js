@@ -73,16 +73,27 @@ const puppeteer = require("puppeteer");
 // })();
 
 //! Measuring performance
+// (async () => {
+//   const browser = await puppeteer.launch({ headless: true });
+//   const page = await browser.newPage();
+
+//   await page.goto("https://pptr.dev");
+//   //   await page.waitForSelector("title");
+
+//   //* Without stryingify() it cannot access to window.performance obj. Just return {}
+//   const metrics = await page.evaluate(() => JSON.stringify(window.performance));
+//   console.log(JSON.parse(metrics));
+
+//   await browser.close();
+// })();
+
+//! Incognito
 (async () => {
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch({ headless: false });
+  const context = await browser.createIncognitoBrowserContext();
+  const page = await context.newPage();
 
   await page.goto("https://pptr.dev");
-  //   await page.waitForSelector("title");
-
-  //* Without stryingify() it cannot access to window.performance obj. Just return {}
-  const metrics = await page.evaluate(() => JSON.stringify(window.performance));
-  console.log(JSON.parse(metrics));
-
+  await page.waitFor(5000);
   await browser.close();
 })();

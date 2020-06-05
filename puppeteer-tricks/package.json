@@ -12,6 +12,7 @@
   "author": "Emily Yu",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^3.3.0"
+    "puppeteer": "^3.3.0",
+    "puppeteer-firefox": "^0.5.1"
   }
 }
