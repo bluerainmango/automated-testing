@@ -32,28 +32,42 @@ const puppeteer = require("puppeteer");
 // })();
 
 //! Incognito and Fake geolocation
+// (async () => {
+//   const browser = await puppeteer.launch({ headless: false });
+//   // If regular browser, you can use below page from browser not from context
+//   //   const page = await browser.newPage();
+
+//   //* Set context for incognito and geo permission
+//   const context = await browser.createIncognitoBrowserContext();
+//   // if regualr browser, use below
+//   //   const context = browser.defaultBrowserContext();
+//   await context.overridePermissions(
+//     "https://chercher.tech/practice/geo-location",
+//     ["geolocation"]
+//   );
+
+//   const page = await context.newPage();
+
+//   await page.goto("https://chercher.tech/practice/geo-location");
+//   await page.waitForSelector("title");
+
+//   //* Change geolocation to the north pole
+//   await page.setGeolocation({ latitude: 90, longitude: 0 });
+
+//   await page.waitFor(10000);
+//   await browser.close();
+// })();
+
+//! Accessibility test
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
-  // If regular browser, you can use below page from browser not from context
-  //   const page = await browser.newPage();
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
 
-  //* Set context for incognito and geo permission
-  const context = await browser.createIncognitoBrowserContext();
-  // if regualr browser, use below
-  //   const context = browser.defaultBrowserContext();
-  await context.overridePermissions(
-    "https://chercher.tech/practice/geo-location",
-    ["geolocation"]
-  );
-
-  const page = await context.newPage();
-
-  await page.goto("https://chercher.tech/practice/geo-location");
+  await page.goto("https://pptr.dev");
   await page.waitForSelector("title");
 
-  //* Change geolocation to the north pole
-  await page.setGeolocation({ latitude: 90, longitude: 0 });
+  const snapshot = await page.accessibility.snapshot();
+  console.log(snapshot.children[0]);
 
-  await page.waitFor(10000);
   await browser.close();
 })();
