@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer-tricks",
+  "version": "1.0.0",
+  "description": "tips and tricks with puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "puppeteer"
+  ],
+  "author": "Emily Yu",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^3.3.0"
+  }
+}
