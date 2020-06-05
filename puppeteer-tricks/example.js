@@ -59,15 +59,30 @@ const puppeteer = require("puppeteer");
 // })();
 
 //! Accessibility test
+// (async () => {
+//   const browser = await puppeteer.launch({ headless: true });
+//   const page = await browser.newPage();
+
+//   await page.goto("https://pptr.dev");
+//   await page.waitForSelector("title");
+
+//   const snapshot = await page.accessibility.snapshot();
+//   console.log(snapshot.children[0]);
+
+//   await browser.close();
+// })();
+
+//! Measuring performance
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto("https://pptr.dev");
-  await page.waitForSelector("title");
+  //   await page.waitForSelector("title");
 
-  const snapshot = await page.accessibility.snapshot();
-  console.log(snapshot.children[0]);
+  //* Without stryingify() it cannot access to window.performance obj. Just return {}
+  const metrics = await page.evaluate(() => JSON.stringify(window.performance));
+  console.log(JSON.parse(metrics));
 
   await browser.close();
 })();
