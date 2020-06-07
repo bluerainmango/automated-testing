@@ -39,6 +39,7 @@ const { url } = require("./config")
 	console.log(fullDate)
 
 	//! Save data to the textfile
+	//* flags: "a" => Append. default: 'w' => Write
 	const logger = fs.createWriteStream("log.txt", { flags: "a" })
 	logger.write(`${fullDate} - ${nameTrim} - ${priceTrim}\n`)
 	logger.close()
